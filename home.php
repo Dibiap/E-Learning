@@ -119,65 +119,9 @@ include_once "included/head.php";
 								endif;
 								?>
 								<div class="row">
-									<?php
-									if ($get_user["role"] === 'supervisor') :
-										$select_lecturer = "SELECT * FROM supervisors WHERE user_id='$user_id'";
-										$query_lecturer = mysqli_query($con, $select_lecturer);
-										if (mysqli_num_rows($query_lecturer) !== 0) :
-											$get_lecturer = mysqli_fetch_assoc($query_lecturer);
-									?>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Company</label>
-													<select name="company_id" class="form-control" required>
-														<option value="">--Select a company you want to intern at--</option>
-														<?php
-														$select_company = "SELECT * FROM company ORDER BY name ASC";
-														$query_company = mysqli_query($con, $select_company);
-														while ($get_company = mysqli_fetch_assoc($query_company)) :
-														?>
-															<option value="<?= $get_company["id"] ?>" <?= ($get_lecturer["company_id"] == $get_company["id"] ? "selected" : "") ?>><?= $get_company["name"] ?></option>
-														<?php
-														endwhile;
-														?>
-													</select>
-												</div>
-											</div>
-									<?php
-										endif;
-									endif;
-									?>
-									<?php
-									if ($get_user["role"] === 'student') :
-										$select_student = "SELECT * FROM students WHERE user_id='$user_id'";
-										$query_student = mysqli_query($con, $select_student);
-										if (mysqli_num_rows($query_student) !== 0) :
-											$get_student = mysqli_fetch_assoc($query_student);
-									?>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Company</label>
-													<select name="company_id" class="form-control" required>
-														<option value="">--Select a company you want to intern at--</option>
-														<?php
-														$select_company = "SELECT * FROM company ORDER BY name ASC";
-														$query_company = mysqli_query($con, $select_company);
-														while ($get_company = mysqli_fetch_assoc($query_company)) :
-														?>
-															<option value="<?= $get_company["id"] ?>" <?= ($get_student["company_id"] == $get_company["id"] ? "selected" : "") ?>><?= $get_company["name"] ?></option>
-														<?php
-														endwhile;
-														?>
-													</select>
-												</div>
-											</div>
-									<?php
-										endif;
-									endif;
-									?>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Status</label>
+											<label>Role</label>
 											<input type="text" class="form-control" name="status" disabled="" value="<?= ucfirst($get_user["role"]) ?>">
 										</div>
 									</div>

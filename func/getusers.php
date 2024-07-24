@@ -6,35 +6,31 @@ require_once "../access/admin_only.php";
 // This is an exclusive POST request
 // It is not being imported anywhere
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $category = $_POST["category"];
-    if ($category == '1') {
-        $select_users = "SELECT * FROM users";
-    } else {
-        switch ($category) {
-            case '2':
-                $role = null;
-                break;
-            case '3':
-                $role = 'student';
-                break;
-            case '4':
-                $role = 'supervisor';
-                # code...
-            case '5':
-                $role = 'lecturer';
-                # code...
-                break;
-            case '6':
-                $role = 'admin';
-                break;
-            default:
-                $_SESSION["alert"] = "Cannot determine User's Category";
-                http_response_code(400);
-                header('location: ../users.php');
-                exit;
-        }
-        $select_users = "SELECT * FROM users  WHERE role='$role'";
+    $_user_id = $_POST["user_id"];
+    $role = $_POST["role"];
+    switch ($role) {
+        case '1':
+            // $role = null || "";
+            $update_user = "UPDATE users SET role=NULL WHERE id='$_user_id'";
+            break;
+        case '2':
+            // $role = 'student';
+            $update_user = "UPDATE users SET role='student' WHERE id='$_user_id'";
+            break;
+        case '3':
+            // $role = 'lecturer';
+            $update_user = "UPDATE users SET role='lecturer' WHERE id='$_user_id'";
+            break;
+        case '4':
+            // $role = 'admin';
+            $update_user = "UPDATE users SET role='admin' WHERE id='$_user_id'";
+            break;
+        default:
+            $_SESSION["alert"] = "Cannot determine User's role";
+            // header('location: ../users.php');
+            exit;
     }
-    $query_users = mysqli_query($con, $select_users);
-    exit;
+    $query_users = mysqli_query($con, $update_user);
 }
+echo "Refresh";
+exit;

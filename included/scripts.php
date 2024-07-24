@@ -12,20 +12,22 @@
 		demo.initChartsPages();
 	});
 
-	function showUsers(category) {
-		if (category === "") {
-			demo.showNotification("top", "right", "Cannot find user category");
+	function setUserRole(user_id, role) {
+		if (user_id === "" || role === "") {
+			demo.showNotification("top", "right", "Cannot find user or role");
 			return;
 		} else {
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("users").innerHTML = this.responseText;
+					if (this.responseText == "Refresh") {
+						window.location.reload()
+					}
 				}
 			};
 			xmlhttp.open("POST", "func/getusers", true);
 			xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xmlhttp.send("category=" + encodeURIComponent(category));
+			xmlhttp.send("user_id=" + encodeURIComponent(user_id) + "&role=" + encodeURIComponent(role));
 
 		}
 	}
