@@ -2,7 +2,7 @@
 require_once "required/session.php";
 require_once "required/sql.php";
 require_once "required/validate.php";
-const PAGE_TITLE = "Home - Digital Logbook System";
+const PAGE_TITLE = "Home - E-Learning System";
 require_once "func/edit-user.php";
 include_once "included/head.php";
 ?>

@@ -14,23 +14,20 @@ if (isset($_SESSION["loginkey"]) && isset($_SESSION["user_id"])) {
 		if ($get_user["role"] !== null) {
 			$_SESSION["alert"] = "You have been redirected here because your account has been approved";
 			header("location: home");
-			echo 1;
 			exit;
 		}
 	} else {
 		$_SESSION["alert"] = "Session expired, please login again";
 		header("location: logout");
-		echo 2;
 		exit;
 	}
 } else {
 	$_SESSION["alert"] = "Session expired, please login again";
 	header("location: logout");
-	echo 3;
 	exit;
 }
 
-const PAGE_TITLE = "Not Approved - Digital Logbook System";
+const PAGE_TITLE = "Not Approved - E-Learning System";
 include_once "included/head.php";
 ?>
 <div class="wrapper ">

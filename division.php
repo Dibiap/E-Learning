@@ -3,11 +3,11 @@ require_once "required/session.php";
 require_once "required/sql.php";
 require_once "required/validate.php";
 require_once "access/admin_only.php";
-const PAGE_TITLE = "Users - E-Learning System";
+const PAGE_TITLE = "Academic Divisions - E-Learning System";
 include_once "included/head.php";
 
-$select_all_user = "SELECT * FROM users ORDER BY id DESC";
-$query_all_user = mysqli_query($con, $select_all_user);
+$select_faculty = "SELECT * FROM faculty ORDER BY id DESC";
+$query_faculty = mysqli_query($con, $select_faculty);
 
 ?>
 <div class="wrapper ">
@@ -21,51 +21,34 @@ $query_all_user = mysqli_query($con, $select_all_user);
         <div class="content">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="add-faculty" class="btn btn-outline-primary" type="button">Add Faculty</a>
+                    </div>
+                </div>
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header clearfix">
-                            <h4 class="card-title float-left">List of All Users (<?= mysqli_num_rows($query_all_user) ?>)</h4>
-                            <div class="float-right">
-                                <label for="category">Users Category</label>
-                                <select name="role" class="form-control" onchange="showUsers(this.value)" id="role">
-                                    <option value="1" selected>All</option>
-                                    <option value="2">None</option>
-                                    <option value="3">Students</option>
-                                    <option value="4">Lecturers</option>
-                                    <option value="5">Admin</option>
-                                </select>
-                            </div>
+                            <h4 class="card-title float-left">List of Faculties (<?= mysqli_num_rows($query_faculty) ?>)</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead class="text-primary">
                                         <th>
-                                            Firstname
+                                            Faculty Name
                                         </th>
-                                        <th>
-                                            Lastname
-                                        </th>
-                                        <th>
-                                            Email
-                                        </th>
-                                        <th>
-                                            Phone
-                                        </th>
-                                        <th>
-                                            Role
+                                        <th class="text-right">
+                                            Actions
                                         </th>
                                     </thead>
-                                    <tbody id="users">
+                                    <tbody id="faculty">
                                         <?php
-                                        while ($get_faculty = mysqli_fetch_assoc($query_all_user)) :
+                                        while ($get_faculty = mysqli_fetch_assoc($query_faculty)) :
                                         ?>
                                             <tr>
-                                                <td><?= $get_faculty["firstname"] ?></td>
-                                                <td><?= $get_faculty["lastname"] ?></td>
-                                                <td><?= $get_faculty["email"] ?></td>
-                                                <td><?= $get_faculty["phone"] ?></td>
+                                                <td><?= $get_faculty["name"] ?></td>
                                                 <td>
-                                                    <select name="role" class="form-control" onchange="setUserRole(<?= $get_faculty['id'] ?>,this.value)" id="role">
+                                                    <select name="role" class="form-control" onchange="setUserRole(<?= $get_faculty['id'] ?>, this.value)" id="role">
                                                         <option value="1" <?php echo ($get_faculty["role"] == '') ? "selected" : "" ?>>None</option>
                                                         <option value="2" <?php echo ($get_faculty["role"] == 'student') ? "selected" : "" ?>>Students</option>
                                                         <option value="3" <?php echo ($get_faculty["role"] == 'lecturer') ? "selected" : "" ?>>Lecturers</option>

@@ -7,7 +7,7 @@
 			<!-- <p>CT</p> -->
 		</a>
 		<a href="javascript:;" class="simple-text logo-normal">
-			SIWES Logbook
+			E-Learning System
 			<!-- <div class="logo-image-big">
 			<img src="assets/img/logo-big.png">
 		  </div> -->
@@ -115,6 +115,19 @@
 						<a href="users">
 							<i class="nc-icon nc-single-02"></i>
 							<p>Users</p>
+						</a>
+					</li>
+					<li class="<?php
+								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
+								$file_name = end($file_path);
+								$route = explode(".", $file_name)[0];
+								if ($route === 'division') {
+									echo 'active';
+								}
+								?>">
+						<a href="division">
+							<i class="nc-icon nc-badge"></i>
+							<p>Division</p>
 						</a>
 					</li>
 					<li class="<?php
