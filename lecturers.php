@@ -12,7 +12,7 @@ if (isset($_SESSION["loginkey"]) && isset($_SESSION["user_id"])) {
 		// Login Validated
 		$get_user = mysqli_fetch_assoc($query_user);
 
-		$select_lecturer = "SELECT * FROM lecturer WHERE user_id='$user_id'";
+		$select_lecturer = "SELECT * FROM lecturers WHERE user_id='$user_id'";
 		$query_lecturer = mysqli_query($con, $select_lecturer);
 		if (mysqli_num_rows($query_lecturer) !== 0) {
 			$_SESSION["alert"] = "Your information have been completed.";

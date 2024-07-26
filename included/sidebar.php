@@ -34,51 +34,7 @@
 				<?php
 				if ($get_user["role"] === 'student') :
 				?>
-					<li class="<?php
-								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
-								$file_name = end($file_path);
-								$route = explode(".", $file_name)[0];
-								if ($route === 'log-entry') {
-									echo 'active';
-								}
-								?>">
-						<a href="log-entry">
-							<i class="nc-icon nc-paper"></i>
-							<p>Log Entry</p>
-						</a>
-					</li>
-					<li class="<?php
-								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
-								$file_name = end($file_path);
-								$route = explode(".", $file_name)[0];
-								if ($route === 'logs') {
-									echo 'active';
-								}
-								?>">
-						<a href="logs">
-							<i class="nc-icon nc-single-copy-04"></i>
-							<p>Logs</p>
-						</a>
-					</li>
-				<?php
-				endif;
-				?>
-				<?php
-				if ($get_user["role"] === 'supervisor') :
-				?>
-					<li class="<?php
-								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
-								$file_name = end($file_path);
-								$route = explode(".", $file_name)[0];
-								if ($route === 'students-logs') {
-									echo 'active';
-								}
-								?>">
-						<a href="students-logs">
-							<i class="nc-icon nc-single-02"></i>
-							<p>Students</p>
-						</a>
-					</li>
+				<!-- Coming Soon -->
 				<?php
 				endif;
 				?>
@@ -89,11 +45,11 @@
 								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
 								$file_name = end($file_path);
 								$route = explode(".", $file_name)[0];
-								if ($route === 'students_logs') {
+								if ($route === 'students-list') {
 									echo 'active';
 								}
 								?>">
-						<a href="students_logs">
+						<a href="students-list">
 							<i class="nc-icon nc-single-02"></i>
 							<p>Students</p>
 						</a>
@@ -134,19 +90,6 @@
 								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
 								$file_name = end($file_path);
 								$route = explode(".", $file_name)[0];
-								if ($route === '_logs') {
-									echo 'active';
-								}
-								?>">
-						<a href="users">
-							<i class="nc-icon nc-single-copy-04"></i>
-							<p>Logs</p>
-						</a>
-					</li>
-					<li class="<?php
-								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
-								$file_name = end($file_path);
-								$route = explode(".", $file_name)[0];
 								if ($route === 'feedbacks') {
 									echo 'active';
 								}
@@ -159,19 +102,6 @@
 				<?php
 				endif;
 				?>
-				<li class="<?php
-							$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
-							$file_name = end($file_path);
-							$route = explode(".", $file_name)[0];
-							if ($route === 'analysis') {
-								echo 'active';
-							}
-							?>">
-					<a href="analysis">
-						<i class="nc-icon nc-chart-bar-32"></i>
-						<p>Analysis</p>
-					</a>
-				</li>
 			<?php
 			endif;
 			?>

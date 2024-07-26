@@ -6,21 +6,32 @@ require_once "access/lecturer_only.php";
 const PAGE_TITLE = "Students Logs - Digital Logbook System";
 include_once "included/head.php";
 // Get Lecturer Info
-$select_lecturer = "SELECT * FROM lecturers WHERE user_id='$user_id'";
-$query_lecturer = mysqli_query($con, $select_lecturer);
-if (mysqli_num_rows($query_lecturer) == 0) {
-  $_SESSION["alert"] = "Your information is not complete";
-  // Takes you to *home* so that you can be redirected to the appropriate route
+// $query_lecturer can be found in `validate.php`
+$get_lecturer = mysqli_fetch_assoc($query_lecturer);
+$department = $get_lecturer["department_id"];
+$faculty = $get_lecturer["faculty_id"];
+
+// Get Students in the same Department and Faculty as the lecturer
+$select_student = "SELECT * FROM students WHERE faculty_id='$faculty' && department_id='$department'";
+$query_student = mysqli_query($con, $select_student);
+
+$select_faculty = "SELECT * FROM faculty WHERE id='$faculty'";
+$query_faculty = mysqli_query($con, $select_faculty);
+if (mysqli_num_rows($query_faculty) == 0) {
+  $_SESSION["alert"] = "Couldn't find faculty";
   header("location: home");
   exit;
 }
-$get_lecturer = mysqli_fetch_assoc($query_lecturer);
-$department = $get_lecturer["department"];
-$faculty = $get_lecturer["faculty"];
+$get_faculty = mysqli_fetch_assoc($query_faculty);
 
-// Get Students in the same Department and Faculty as the lecturer
-$select_student = "SELECT * FROM students WHERE faculty='$faculty' && department='$department'";
-$query_student = mysqli_query($con, $select_student);
+$select_department = "SELECT * FROM departments WHERE id='$department'";
+$query_department = mysqli_query($con, $select_department);
+if (mysqli_num_rows($query_department) == 0) {
+  $_SESSION["alert"] = "Couldn't find department";
+  header("location: home");
+  exit;
+}
+$get_department = mysqli_fetch_assoc($query_department);
 require_once "func/feedback.php";
 ?>
 <div class="wrapper ">
@@ -36,7 +47,7 @@ require_once "func/feedback.php";
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Students at <?= $department . ", Faculty of " . $faculty ?></h4>
+              <h4 class="card-title">Students at <?= $get_department["name"] . ", Faculty of " . $get_faculty["name"] ?></h4>
             </div>
             <div class="card-body">
               <div class="">
@@ -49,13 +60,10 @@ require_once "func/feedback.php";
                       Email
                     </th>
                     <th>
-                      Faculty
+                      Phone number
                     </th>
                     <th>
-                      Department
-                    </th>
-                    <th class="text-right">
-                      Action
+                      Matric number
                     </th>
                   </thead>
                   <tbody>
@@ -73,13 +81,8 @@ require_once "func/feedback.php";
                                 <?= $get_student_user["firstname"] . " " . $get_student_user["lastname"] ?>
                               </td>
                               <td><?= $get_student_user["email"] ?></td>
-                              <td><?= $get_student["faculty"] ?></td>
-                              <td><?= $get_student["department"] ?></td>
-                              <td class="text-right">
-                                <a href="student_logs?id=<?= $get_student_user["id"] ?>" title="more">
-                                  <i class="nc-icon nc-minimal-right"></i>
-                                </a>
-                              </td>
+                              <td><?= $get_student_user["phone"] ?></td>
+                              <td><?= $get_student["matric"] ?></td>
                             </tr>
                           <?php
                     endwhile;

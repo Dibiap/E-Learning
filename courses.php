@@ -47,13 +47,13 @@ require_once "func/add-course.php";
                         <select name="lecturer_id" class="form-control" required>
                             <option value="" disabled selected>Lecturer's Name</option>
                             <?php
-                            $select_lecturer = "SELECT * FROM lecturers";
+                            $select_lecturer = "SELECT * FROM lecturers WHERE department_id='$department_id'";
                             $query_lecturer = mysqli_query($con, $select_lecturer);
-                            echo mysqli_num_rows($query_lecturer);
+                            // echo mysqli_num_rows($query_lecturer);
                             if (mysqli_num_rows($query_lecturer) != 0) :
                                 while ($get_lecturer = mysqli_fetch_assoc($query_lecturer)) :
                                     $lecturer_user_id = $get_lecturer["user_id"];
-                                    $select_lecturer_user = "SELECT * users WHERE id='$lecturer_user_id'";
+                                    $select_lecturer_user = "SELECT * FROM users WHERE id='$lecturer_user_id'";
                                     $query_lecturer_user = mysqli_query($con, $select_lecturer_user);
                                     if (mysqli_num_rows($query_lecturer_user) != 1)
                                         continue;
@@ -90,6 +90,7 @@ require_once "func/add-course.php";
                                         <th>Course Code</th>
                                         <th>Course Name</th>
                                         <th>Unit</th>
+                                        <th>Lecturer</th>
                                         <th class="text-right">Actions</th>
                                     </thead>
                                     <tbody id="course">
@@ -100,6 +101,31 @@ require_once "func/add-course.php";
                                                 <td><?= $get_course["code"] ?></td>
                                                 <td><?= $get_course["name"] ?></td>
                                                 <td><?= $get_course["unit"] ?></td>
+                                                <?php
+                                                $select_lecturer = "SELECT * FROM lecturers WHERE id='". $get_course["lecturer_id"] ."'";
+                                                $query_lecturer = mysqli_query($con, $select_lecturer);
+                                                if (mysqli_num_rows($query_lecturer) == 0) :
+                                                ?>
+                                                    <td>Not Available</td>
+                                                <?php
+                                                else:
+                                                    $get_lecturer = mysqli_fetch_assoc($query_lecturer);
+
+                                                    $select_lecturer_user = "SELECT * FROM users WHERE id='". $get_lecturer["user_id"] ."'";
+                                                    $query_lecturer_user = mysqli_query($con, $select_lecturer_user);
+                                                    if (mysqli_num_rows($query_lecturer_user) == 0):
+                                                    ?>
+                                                        <td>Not Available</td>
+                                                    <?php
+                                                    else:
+                                                        $get_lecturer_user = mysqli_fetch_assoc($query_lecturer_user);
+                                                        $lecturer_name = $get_lecturer_user["firstname"] . " " . $get_lecturer_user["lastname"];
+                                                        ?>
+                                                            <td><?= $lecturer_name ?></td>
+                                                        <?php
+                                                        endif;
+                                                endif;
+                                                ?>
                                                 <td class="text-right">
                                                     <a href="func/delete-course?course_id=<?= $get_course["id"] ?>" class="btn btn-danger">Delete Course</a>
                                                 </td>

@@ -126,35 +126,92 @@ include_once "included/head.php";
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Faculty</label>
-													<select class="form-control" name="faculty" id="faculty" required>
-														<?php
-														$select_faculty = "SELECT * FROM faculty WHERE id='" . $get_lecturer["faculty_id"] . "' ORDER BY id DESC";
-														$query_faculty = mysqli_query($con, $select_faculty);
-														if (mysqli_num_rows($query_faculty) != 0) :
-															$get_faculty = mysqli_fetch_assoc($query_faculty)
-														?>
-															<option value="<?= $get_faculty["id"] ?>" selected><?= $get_faculty["name"] ?></option>
-														<?php
-														endif;
-														?>
-													</select>
+													<?php
+													$select_faculty = "SELECT * FROM faculty WHERE id='" . $get_lecturer["faculty_id"] . "' ORDER BY id DESC";
+													$query_faculty = mysqli_query($con, $select_faculty);
+													if (mysqli_num_rows($query_faculty) != 0) :
+														$get_faculty = mysqli_fetch_assoc($query_faculty)
+													?>
+														<input type="text" class="form-control" name="faculty" disabled="" value="<?= ucfirst($get_faculty["name"]) ?>">
+													<?php
+													endif;
+													?>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Department</label>
-													<select class="form-control" name="department" id="department" required>
-														<?php
-														$select_department = "SELECT * FROM departments WHERE id='" . $get_lecturer["department_id"] . "' ORDER BY id DESC";
-														$query_department = mysqli_query($con, $select_department);
-														if (mysqli_num_rows($query_department) != 0) :
-															$get_department = mysqli_fetch_assoc($query_department)
-														?>
-															<option value="<?= $get_department["id"] ?>"><?= $get_department["name"] ?></option>
-														<?php
-														endif;
-														?>
-													</select>
+													<?php
+													$select_department = "SELECT * FROM departments WHERE id='" . $get_lecturer["department_id"] . "' ORDER BY id DESC";
+													$query_department = mysqli_query($con, $select_department);
+													if (mysqli_num_rows($query_department) != 0) :
+														$get_department = mysqli_fetch_assoc($query_department)
+													?>
+														<input type="text" class="form-control" name="department" disabled="" value="<?= ucfirst($get_department["name"]) ?>">
+													<?php
+													endif;
+													?>
+												</div>
+											</div>
+											<?php
+											$select_course = "SELECT * FROM courses WHERE lecturer_id='" . $get_lecturer["id"] . "'";
+											$query_course = mysqli_query($con, $select_course);
+											if (mysqli_num_rows($query_course) != 0) {
+												$get_course = mysqli_fetch_assoc($query_course);
+											}
+											?>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Course Name</label>
+													<?php
+													if (mysqli_num_rows($query_course) == 0) :
+														// Lecturer has not been assigned to a course
+													?>
+														<input type="text" class="form-control" name="coursename" disabled="" value="Not Available">
+													<?php
+													else :
+														// Lecturer has been assigned to a course
+													?>
+														<input type="text" class="form-control" name="coursename" disabled="" value="<?= ucfirst($get_course["name"]) ?>">
+													<?php
+													endif;
+													?>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Course Code</label>
+													<?php
+													if (mysqli_num_rows($query_course) == 0) :
+														// Lecturer has not been assigned to a course
+													?>
+														<input type="text" class="form-control" name="coursecode" disabled="" value="Not Available">
+													<?php
+													else :
+														// Lecturer has been assigned to a course
+													?>
+														<input type="text" class="form-control" name="coursecode" disabled="" value="<?= ucfirst($get_course["code"]) ?>">
+													<?php
+													endif;
+													?>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Course Unit</label>
+													<?php
+													if (mysqli_num_rows($query_course) == 0) :
+														// Lecturer has not been assigned to a course
+													?>
+														<input type="text" class="form-control" name="courseunit" disabled="" value="Not Available">
+													<?php
+													else :
+														// Lecturer has been assigned to a course
+													?>
+														<input type="text" class="form-control" name="courseunit" disabled="" value="<?= ucfirst($get_course["unit"]) ?>">
+													<?php
+													endif;
+													?>
 												</div>
 											</div>
 										</div>
