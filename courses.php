@@ -40,8 +40,32 @@ require_once "func/add-course.php";
         <div class="content">
             <div class="row p-0">
                 <form action="" method="post" class="input-group">
-                    <div class="col-md-5 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <input type="text" class="form-control" placeholder="Course Name" name="name">
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <select name="lecturer_id" class="form-control" required>
+                            <option value="" disabled selected>Lecturer's Name</option>
+                            <?php
+                            $select_lecturer = "SELECT * FROM lecturers";
+                            $query_lecturer = mysqli_query($con, $select_lecturer);
+                            echo mysqli_num_rows($query_lecturer);
+                            if (mysqli_num_rows($query_lecturer) != 0) :
+                                while ($get_lecturer = mysqli_fetch_assoc($query_lecturer)) :
+                                    $lecturer_user_id = $get_lecturer["user_id"];
+                                    $select_lecturer_user = "SELECT * users WHERE id='$lecturer_user_id'";
+                                    $query_lecturer_user = mysqli_query($con, $select_lecturer_user);
+                                    if (mysqli_num_rows($query_lecturer_user) != 1)
+                                        continue;
+                                    // Lecturer_id is the value
+                                    $get_lecturer_user = mysqli_fetch_assoc($query_lecturer_user)
+                                    ?>
+                                    <option value="<?= $get_lecturer["id"] ?>"><?= $get_lecturer_user["firstname"] . " " . $get_lecturer_user["lastname"] ?></option>
+                                    <?php
+                                endwhile;
+                            endif;
+                            ?>
+                        </select>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <input type="text" class="form-control" placeholder="Course Code" name="code">
@@ -66,9 +90,7 @@ require_once "func/add-course.php";
                                         <th>Course Code</th>
                                         <th>Course Name</th>
                                         <th>Unit</th>
-                                        <th class="text-right">
-                                            Actions
-                                        </th>
+                                        <th class="text-right">Actions</th>
                                     </thead>
                                     <tbody id="course">
                                         <?php
