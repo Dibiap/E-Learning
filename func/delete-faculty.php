@@ -7,12 +7,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $faculty_id = $_GET["faculty_id"];
     $select_department = "SELECT * FROM departments WHERE faculty_id='$faculty_id'";
     $query_department = mysqli_query($con, $select_department);
-    while ($get_department_id = mysqli_fetch_assoc($query_department)["id"]) {
-        $delete_course = "DELETE FROM courses WHERE department_id='$get_department_id'";
-        if (!mysqli_query($con, $delete_course)) {
-            $_SESSION["alert"] = "An error occured, could not delete faculty";
-            header("location: ../division.php");
-            exit;
+    if (mysqli_num_rows($query_department) < 1) {
+        while ($get_department_id = mysqli_fetch_assoc($query_department)["id"]) {
+            $delete_course = "DELETE FROM courses WHERE department_id='$get_department_id'";
+            if (!mysqli_query($con, $delete_course)) {
+                $_SESSION["alert"] = "An error occured, could not delete faculty";
+                header("location: ../division.php");
+                exit;
+            }
         }
     }
     $delete_department = "DELETE FROM departments WHERE faculty_id='$faculty_id'";
