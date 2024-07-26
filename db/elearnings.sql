@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 22, 2024 at 02:32 PM
+-- Generation Time: Jul 26, 2024 at 02:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `logbook`
+-- Database: `elearnings`
 --
 
 -- --------------------------------------------------------
@@ -58,6 +58,74 @@ INSERT INTO `company` (`id`, `name`, `address`, `datetime`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `lecturer_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `unit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `department_id`, `lecturer_id`, `name`, `code`, `unit`) VALUES
+(12, 3, 3, 'Database', '434', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departments`
+--
+
+CREATE TABLE `departments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`id`, `faculty_id`, `name`) VALUES
+(3, 1, 'Computer Science'),
+(10, 11, 'Accounting'),
+(11, 11, 'Marketing'),
+(12, 9, 'Quantity Survey'),
+(13, 8, 'English'),
+(14, 8, 'Socials'),
+(15, 1, 'Mathematics');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faculty`
+--
+
+CREATE TABLE `faculty` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`id`, `name`) VALUES
+(1, 'Science'),
+(8, 'Humanities'),
+(9, 'Evironment'),
+(11, 'Management');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `feedbacks`
 --
 
@@ -91,9 +159,17 @@ INSERT INTO `feedbacks` (`id`, `supervisor_id`, `student_id`, `log_id`, `company
 CREATE TABLE `lecturers` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `faculty` varchar(50) NOT NULL,
-  `department` varchar(50) NOT NULL
+  `faculty_id` varchar(50) NOT NULL,
+  `department_id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lecturers`
+--
+
+INSERT INTO `lecturers` (`id`, `user_id`, `faculty_id`, `department_id`) VALUES
+(3, 17, '1', '3'),
+(4, 18, '8', '13');
 
 -- --------------------------------------------------------
 
@@ -132,18 +208,18 @@ CREATE TABLE `students` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
   `matric` varchar(20) NOT NULL,
-  `faculty` varchar(50) NOT NULL,
-  `department` varchar(50) NOT NULL,
-  `company_id` int(11) NOT NULL
+  `faculty_id` varchar(50) NOT NULL,
+  `department_id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `user_id`, `matric`, `faculty`, `department`, `company_id`) VALUES
-(3, 13, 'DE:2020/4316', 'Science', 'Computer Science', 1),
-(4, 15, 'DE.2020/4276', 'Science', 'Computer Science', 1);
+INSERT INTO `students` (`id`, `user_id`, `matric`, `faculty_id`, `department_id`) VALUES
+(3, 13, 'DE:2020/4316', 'Science', 'Computer Science'),
+(4, 15, 'DE.2020/4276', 'Science', 'Computer Science'),
+(5, 16, 'DE.2020/4228', '1', '3');
 
 -- --------------------------------------------------------
 
@@ -177,7 +253,7 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `password` varchar(60) NOT NULL,
-  `role` set('student','supervisor','lecturer','admin') DEFAULT NULL,
+  `role` set('student','lecturer','admin') DEFAULT NULL,
   `loginkey` varchar(60) CHARACTER SET gb2312 COLLATE gb2312_chinese_nopad_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -186,10 +262,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `phone`, `password`, `role`, `loginkey`) VALUES
-(2, 'Prime', 'Okanlawon', 'oyedelenewton@gmail.com', '09114895572', '$2y$10$jOOzpVYz2YxtUydtXjNZquvU/.qKbqAyPAgSV5ujYmhTHSMMLsx4.', 'admin', '$2y$10$xkco/mAZPAtEYou94GGisOUEUaRfPKmiGZjiPHjNcUhOXX5L32yp.'),
-(13, 'Martins', 'Okanlawon', 'martinsobomate@gmail.com', '08087837190', '$2y$10$uXRahs6XxaI1.2BrYurYjOITG3xVwXALkpJJqbsJYofdpfzgKAXx2', 'student', '$2y$10$YIMl2QFfmxrPl4iZkKuLFu6EGKPBrwY0vSm/8VZdrgYP.DbJfmN3.'),
-(14, 'Boma', 'Cookey', 'boma@cookey.com', '1234567890', '$2y$10$hygKxX00ilOcp/vx9vTG4eMSELNYSlREPR/QkFKZCqvSl.8..ze1y', 'supervisor', '$2y$10$GPSZtdf/ibgkZdSdG6u6iulkXLBzjUwsK0dI7uV8SYrgHVmfbIRzi'),
-(15, 'Fortune', 'Barido', 'fb@gmail.com', '98765432', '$2y$10$T26hqjBvk6edqut2eHkEW.djACWz1nD1j4NyePJugMC0LU4/y2Ivy', 'student', '$2y$10$wUhFNGskYHD6NYTXNt2LK.ZIXh3AaaSJ4Y0uehhrV4aIzyV34UVx6');
+(2, 'admin', 'admin', 'admin@gmail.com', '09114895572', '$2y$10$2nV8gty7hxjhQw59CB/sg.aCvwVVriFsiYDThFJWY1TJCb2FU8dPK', 'admin', '$2y$10$IBCXrKO6YRvjmuGEzuThBORi6CtO3.vFufFS9szFTn73prF.h4ezC'),
+(16, 'Student', 'Student', 'student@gmail.com', '123490', '$2y$10$X3iWj8G3.SWcQWYxjme7vuZE3RGfNj.9.D9dhiMTfrYQmS21gpe1W', 'student', '$2y$10$xaxu6FbZuBp7d8T9MtA/geNTq7Mu.Nkvp/wXZbyFm3ebYU0YNCDZ.'),
+(17, 'Teacher', 'Teacher', 'teacher@gmail.com', '98765232131', '$2y$10$euY/594uN3O6NHs6pL/ILOSkpyf2roMQWYFROni33mTU25u2q12Xy', 'lecturer', '$2y$10$iBYZy3M6/R6tZ98ZH8oxguMkb1.W6bRtR/bDGanLNbuINpYiJ6l06'),
+(18, 'Lecturer', 'Lecturer', 'lecturer@gmail.com', '463789201', '$2y$10$BCgetVN3fDb2iOkHMmzXnuXgM4vvcKbS1PX1d3e7VZaQAlucAWdQa', 'lecturer', '$2y$10$A48jt.bJoaAinGP7I9PcG.kGaBvIoyjZf3TF21Ube5M1712X5US16');
 
 --
 -- Indexes for dumped tables
@@ -199,6 +275,24 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `phone`, `password`
 -- Indexes for table `company`
 --
 ALTER TABLE `company`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `departments`
+--
+ALTER TABLE `departments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faculty`
+--
+ALTER TABLE `faculty`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -248,6 +342,24 @@ ALTER TABLE `company`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `departments`
+--
+ALTER TABLE `departments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `faculty`
+--
+ALTER TABLE `faculty`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
@@ -257,7 +369,7 @@ ALTER TABLE `feedbacks`
 -- AUTO_INCREMENT for table `lecturers`
 --
 ALTER TABLE `lecturers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `logs`
@@ -269,7 +381,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `supervisors`
@@ -281,7 +393,7 @@ ALTER TABLE `supervisors`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
