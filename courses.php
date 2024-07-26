@@ -9,30 +9,25 @@ include_once "included/head.php";
 if (isset($_GET["department_id"])) {
     $department_id = $_GET["department_id"];
 
-    $select_department = "SELECT * FROM faculty WHERE id='$department_id'";
+    $select_department = "SELECT * FROM departments WHERE id='$department_id'";
     $query_department = mysqli_query($con, $select_department);
 
     if (mysqli_num_rows($query_department) == 0) {
         $_SESSION["alert"] = "Cannot find department";
-        header("location: divisons");
+        header("location: division");
         exit;
     }
     $get_department = mysqli_fetch_assoc($query_department);
 
-    $select_course = "SELECT * FROM course WHERE department_id='$department_id'";
+    $select_course = "SELECT * FROM courses WHERE department_id='$department_id' ORDER BY id DESC";
     $query_course = mysqli_query($con, $select_course);
-    if (mysqli_num_rows($query_course) == 0) {
-        $_SESSION["alert"] = "Cannot find course";
-        header("location: divisons");
-        exit;
-    }
 } else {
     $_SESSION["alert"] = "Cannot find department";
-    header("location: divisons");
+    header("location: division");
     exit;
 }
 
-// require_once "func/add-course.php";
+require_once "func/add-course.php";
 ?>
 <div class="wrapper ">
     <?php
@@ -43,13 +38,22 @@ if (isset($_GET["department_id"])) {
         include_once "included/navbar.php";
         ?>
         <div class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <form action="" method="post" class="input-group">
-                        <input type="text" class="form-control" name="name" placeholder="Department Name" aria-label="Department Name" aria-describedby="button-addon2" style="padding: 0px 10px;">
-                        <button class="btn btn-outline-primary" type="submits" id="button-addon2">Add Department</button>
-                    </form>
-                </div>
+            <div class="row p-0">
+                <form action="" method="post" class="input-group">
+                    <div class="col-md-5 col-sm-12">
+                        <input type="text" class="form-control" placeholder="Course Name" name="name">
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <input type="text" class="form-control" placeholder="Course Code" name="code">
+                    </div>
+                    <div class="col-md-2 col-sm-3">
+                        <input type="number" class="form-control" placeholder="Course Unit" name="unit">
+                    </div>
+                    <div class="col-md-2 col-sm-3">
+                        <button type="submit" class="btn btn-outline-primary m-0">Add Course</button>
+                    </div>
+
+                </form>
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header clearfix">
@@ -75,7 +79,7 @@ if (isset($_GET["department_id"])) {
                                                 <td><?= $get_course["name"] ?></td>
                                                 <td><?= $get_course["unit"] ?></td>
                                                 <td class="text-right">
-                                                    <a href="delete-course?course_id=<?= $get_course["id"] ?>" class="btn btn-danger">Delete Course</a>
+                                                    <a href="func/delete-course?course_id=<?= $get_course["id"] ?>" class="btn btn-danger">Delete Course</a>
                                                 </td>
                                             </tr>
                                         <?php

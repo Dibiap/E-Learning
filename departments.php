@@ -9,29 +9,23 @@ include_once "included/head.php";
 if (isset($_GET["faculty_id"])) {
     $department_id = $_GET["faculty_id"];
 
-    $select_department = "SELECT * FROM faculty WHERE id='$department_id'";
-    $query_department = mysqli_query($con, $select_department);
+    $select_faculty = "SELECT * FROM faculty WHERE id='$department_id'";
+    $query_faculty = mysqli_query($con, $select_faculty);
 
-    if (mysqli_num_rows($query_department) == 0) {
+    if (mysqli_num_rows($query_faculty) == 0) {
         $_SESSION["alert"] = "Cannot find faculty";
-        header("location: divisons");
+        header("location: division");
         exit;
     }
-    $get_department = mysqli_fetch_assoc($query_department);
+    $get_faculty = mysqli_fetch_assoc($query_faculty);
 
-    $select_course = "SELECT * FROM department WHERE faculty_id='$department_id'";
-    $query_course = mysqli_query($con, $select_course);
-    if (mysqli_num_rows($query_course) == 0) {
-        $_SESSION["alert"] = "Cannot find Department";
-        header("location: divisons");
-        exit;
-    }
+    $select_department = "SELECT * FROM departments WHERE faculty_id='$department_id' ORDER BY id DESC";
+    $query_department = mysqli_query($con, $select_department);
 } else {
     $_SESSION["alert"] = "Cannot find faculty";
-    header("location: divisons");
+    header("location: division");
     exit;
 }
-
 
 require_once "func/add-department.php";
 ?>
@@ -54,7 +48,7 @@ require_once "func/add-department.php";
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header clearfix">
-                            <h4 class="card-title float-left">List of Departments in <?= $get_course["name"] ?> (<?= mysqli_num_rows($query_course) ?>)</h4>
+                            <h4 class="card-title float-left">List of Departments in <?= $get_faculty["name"] ?> (<?= mysqli_num_rows($query_department) ?>)</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -69,13 +63,13 @@ require_once "func/add-department.php";
                                     </thead>
                                     <tbody id="department">
                                         <?php
-                                        while ($get_course = mysqli_fetch_assoc($query_course)) :
+                                        while ($get_department = mysqli_fetch_assoc($query_department)) :
                                         ?>
                                             <tr>
-                                                <td><?= $get_course["name"] ?></td>
+                                                <td><?= $get_department["name"] ?></td>
                                                 <td class="text-right">
-                                                    <a href="courses?department_id=<?= $get_course["id"] ?>" class="btn btn-outline-primary">View Courses</a>
-                                                    <a href="delete-department?department_id=<?= $get_course["id"] ?>" class="btn btn-danger">Delete Department</a>
+                                                    <a href="courses?department_id=<?= $get_department["id"] ?>" class="btn btn-outline-primary">View Courses</a>
+                                                    <a href="func/delete-department?department_id=<?= $get_department["id"] ?>" class="btn btn-danger">Delete Department</a>
                                                 </td>
                                             </tr>
                                         <?php

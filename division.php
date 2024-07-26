@@ -6,8 +6,8 @@ require_once "access/admin_only.php";
 const PAGE_TITLE = "Academic Divisions - E-Learning System";
 include_once "included/head.php";
 
-$select_course = "SELECT * FROM faculty ORDER BY id DESC";
-$query_course = mysqli_query($con, $select_course);
+$select_faculty = "SELECT * FROM faculty ORDER BY id DESC";
+$query_faculty = mysqli_query($con, $select_faculty);
 
 require_once "func/add-faculty.php";
 ?>
@@ -30,7 +30,7 @@ require_once "func/add-faculty.php";
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header clearfix">
-                            <h4 class="card-title float-left">List of Faculties (<?= mysqli_num_rows($query_course) ?>)</h4>
+                            <h4 class="card-title float-left">List of Faculties (<?= mysqli_num_rows($query_faculty) ?>)</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -45,13 +45,13 @@ require_once "func/add-faculty.php";
                                     </thead>
                                     <tbody id="faculty">
                                         <?php
-                                        while ($get_course = mysqli_fetch_assoc($query_course)) :
+                                        while ($get_faculty = mysqli_fetch_assoc($query_faculty)) :
                                         ?>
                                             <tr>
-                                                <td><?= $get_course["name"] ?></td>
+                                                <td><?= $get_faculty["name"] ?></td>
                                                 <td class="text-right">
-                                                    <a href="departments?faculty_id=<?= $get_course["id"] ?>" class="btn btn-outline-primary">View Departments</a>
-                                                    <a href="func/delete-faculty?faculty_id=<?= $get_course["id"] ?>" class="btn btn-danger">Delete Faculty</a>
+                                                    <a href="departments?faculty_id=<?= $get_faculty["id"] ?>" class="btn btn-outline-primary">View Departments</a>
+                                                    <a href="func/delete-faculty?faculty_id=<?= $get_faculty["id"] ?>" class="btn btn-danger">Delete Faculty</a>
                                                 </td>
                                             </tr>
                                         <?php
