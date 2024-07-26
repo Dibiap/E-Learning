@@ -40,10 +40,10 @@ require_once "func/add-course.php";
         <div class="content">
             <div class="row p-0">
                 <form action="" method="post" class="input-group">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-12 mb-2">
                         <input type="text" class="form-control" placeholder="Course Name" name="name">
                     </div>
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-12 mb-2">
                         <select name="lecturer_id" class="form-control" required>
                             <option value="" disabled selected>Lecturer's Name</option>
                             <?php
@@ -67,13 +67,13 @@ require_once "func/add-course.php";
                             ?>
                         </select>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-5 col-sm-6 mb-2">
                         <input type="text" class="form-control" placeholder="Course Code" name="code">
                     </div>
-                    <div class="col-md-2 col-sm-3">
+                    <div class="col-md-5 col-sm-3 mb-2">
                         <input type="number" class="form-control" placeholder="Course Unit" name="unit">
                     </div>
-                    <div class="col-md-2 col-sm-3">
+                    <div class="col-md-2 col-sm-3 mb-2">
                         <button type="submit" class="btn btn-outline-primary m-0">Add Course</button>
                     </div>
 

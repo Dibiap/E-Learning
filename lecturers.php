@@ -12,13 +12,14 @@ if (isset($_SESSION["loginkey"]) && isset($_SESSION["user_id"])) {
 		// Login Validated
 		$get_user = mysqli_fetch_assoc($query_user);
 
-		$select_student = "SELECT * FROM students WHERE user_id='$user_id'";
-		$query_student = mysqli_query($con, $select_student);
-		if (mysqli_num_rows($query_student) !== 0) {
+		$select_lecturer = "SELECT * FROM lecturer WHERE user_id='$user_id'";
+		$query_lecturer = mysqli_query($con, $select_lecturer);
+		if (mysqli_num_rows($query_lecturer) !== 0) {
 			$_SESSION["alert"] = "Your information have been completed.";
 			header("location: home");
 			exit;
 		}
+
 		if ($get_user["role"] !== 'lecturer') {
 			// Get redirected to appropriate page
 			$_SESSION["alert"] = "Your information is not complete.";
@@ -91,13 +92,26 @@ require_once "func/lecturers.php";
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Faculty</label>
-											<input type="text" class="form-control" name="faculty" placeholder="Faculty" required>
+											<select class="form-control" name="faculty" id="faculty" required>
+												<option value="" disabled selected>--Select-a-faculty--</option>
+												<?php
+												$select_faculty = "SELECT * FROM faculty ORDER BY id DESC";
+												$query_faculty = mysqli_query($con, $select_faculty);
+												if (mysqli_num_rows($query_faculty) != 0) :
+													while ($get_faculty = mysqli_fetch_assoc($query_faculty)) :
+												?>
+														<option value="<?= $get_faculty["id"] ?>"><?= $get_faculty["name"] ?></option>
+												<?php
+													endwhile;
+												endif;
+												?>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Department</label>
-											<input type="text" class="form-control" name="department" placeholder="Department" required>
+											<select class="form-control" name="department" id="department" required></select>
 										</div>
 									</div>
 								</div>
@@ -118,6 +132,35 @@ require_once "func/lecturers.php";
 	</div>
 </div>
 
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var faculty = document.getElementById('faculty');
+		var department = document.getElementById('department');
+
+		faculty.addEventListener('change', function() {
+			var facultyId = this.value;
+			if (facultyId !== "") {
+				fetch('func/fetch_departments', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						},
+						body: 'faculty_id=' + facultyId
+					})
+					.then(response => response.text())
+					.then(data => {
+						department.innerHTML = data;
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						department.innerHTML = '<option value="" disabled selected>Please refresh and try again</option>';
+					});
+			} else {
+				department.innerHTML = '<option value="" disabled selected>Please refresh and try again</option>';
+			}
+		});
+	});
+</script>
 <?php
 include_once "included/scripts.php";
 ?>

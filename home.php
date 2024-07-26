@@ -79,13 +79,35 @@ include_once "included/head.php";
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Faculty</label>
-													<input type="text" class="form-control" name="faculty" placeholder="Faculty" value="<?= $get_student["faculty"] ?>">
+													<select class="form-control" name="faculty" id="faculty" required>
+														<?php
+														$select_faculty = "SELECT * FROM faculty WHERE id='" . $get_student["faculty_id"] . "' ORDER BY id DESC";
+														$query_faculty = mysqli_query($con, $select_faculty);
+														if (mysqli_num_rows($query_faculty) != 0) :
+															$get_faculty = mysqli_fetch_assoc($query_faculty)
+														?>
+															<option value="<?= $get_faculty["id"] ?>" selected><?= $get_faculty["name"] ?></option>
+														<?php
+														endif;
+														?>
+													</select>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Department</label>
-													<input type="text" class="form-control" name="department" placeholder="Department" value="<?= $get_student["department"] ?>">
+													<select class="form-control" name="department" id="department" required>
+														<?php
+														$select_department = "SELECT * FROM departments WHERE id='" . $get_student["department_id"] . "' ORDER BY id DESC";
+														$query_department = mysqli_query($con, $select_department);
+														if (mysqli_num_rows($query_department) != 0) :
+															$get_department = mysqli_fetch_assoc($query_department)
+														?>
+															<option value="<?= $get_department["id"] ?>"><?= $get_department["name"] ?></option>
+														<?php
+														endif;
+														?>
+													</select>
 												</div>
 											</div>
 										</div>
@@ -104,13 +126,35 @@ include_once "included/head.php";
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Faculty</label>
-													<input type="text" class="form-control" name="faculty" placeholder="Faculty" value="<?= $get_lecturer["faculty"] ?>">
+													<select class="form-control" name="faculty" id="faculty" required>
+														<?php
+														$select_faculty = "SELECT * FROM faculty WHERE id='" . $get_lecturer["faculty_id"] . "' ORDER BY id DESC";
+														$query_faculty = mysqli_query($con, $select_faculty);
+														if (mysqli_num_rows($query_faculty) != 0) :
+															$get_faculty = mysqli_fetch_assoc($query_faculty)
+														?>
+															<option value="<?= $get_faculty["id"] ?>" selected><?= $get_faculty["name"] ?></option>
+														<?php
+														endif;
+														?>
+													</select>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Department</label>
-													<input type="text" class="form-control" name="department" placeholder="Department" value="<?= $get_lecturer["department"] ?>">
+													<select class="form-control" name="department" id="department" required>
+														<?php
+														$select_department = "SELECT * FROM departments WHERE id='" . $get_lecturer["department_id"] . "' ORDER BY id DESC";
+														$query_department = mysqli_query($con, $select_department);
+														if (mysqli_num_rows($query_department) != 0) :
+															$get_department = mysqli_fetch_assoc($query_department)
+														?>
+															<option value="<?= $get_department["id"] ?>"><?= $get_department["name"] ?></option>
+														<?php
+														endif;
+														?>
+													</select>
 												</div>
 											</div>
 										</div>
