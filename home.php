@@ -166,6 +166,7 @@ include_once "included/head.php";
 													<?php
 													if (mysqli_num_rows($query_course) == 0) :
 														// Lecturer has not been assigned to a course
+														$_SESSION["alert"] = "You have not been assigned to a course";
 													?>
 														<input type="text" class="form-control" name="coursename" disabled="" value="Not Available">
 													<?php
@@ -184,6 +185,7 @@ include_once "included/head.php";
 													<?php
 													if (mysqli_num_rows($query_course) == 0) :
 														// Lecturer has not been assigned to a course
+														$_SESSION["alert"] = "You have not been assigned to a course";
 													?>
 														<input type="text" class="form-control" name="coursecode" disabled="" value="Not Available">
 													<?php
@@ -202,6 +204,7 @@ include_once "included/head.php";
 													<?php
 													if (mysqli_num_rows($query_course) == 0) :
 														// Lecturer has not been assigned to a course
+														$_SESSION["alert"] = "You have not been assigned to a course";
 													?>
 														<input type="text" class="form-control" name="courseunit" disabled="" value="Not Available">
 													<?php

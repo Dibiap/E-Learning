@@ -34,7 +34,7 @@
 				<?php
 				if ($get_user["role"] === 'student') :
 				?>
-				<!-- Coming Soon -->
+					<!-- Coming Soon -->
 				<?php
 				endif;
 				?>
@@ -52,6 +52,19 @@
 						<a href="students-list">
 							<i class="nc-icon nc-single-02"></i>
 							<p>Students</p>
+						</a>
+					</li>
+					<li class="<?php
+								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
+								$file_name = end($file_path);
+								$route = explode(".", $file_name)[0];
+								if ($route === 'lesson') {
+									echo 'active';
+								}
+								?>">
+						<a href="lesson">
+							<i class="nc-icon nc-paper"></i>
+							<p>Lesson</p>
 						</a>
 					</li>
 				<?php
