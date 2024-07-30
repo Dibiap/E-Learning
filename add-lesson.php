@@ -43,7 +43,7 @@ require_once "func/add-lesson.php";
                             <h5 class="card-title">Add Lesson</h5>
                         </div>
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
@@ -55,6 +55,12 @@ require_once "func/add-lesson.php";
                                         <div class="form-group">
                                             <label>Date</label>
                                             <input type="text" class="form-control" value="<?= date("l d, M Y") ?>" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Attachment: <small>all attachments (single or multiple) must be zipped and less than 100MB</small></label>
+                                            <input type="file" name="attachment" style="position: relative; opacity: 100;" class="form-control" accept=".zip">
                                         </div>
                                     </div>
                                 </div>

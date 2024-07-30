@@ -12,12 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $file_format = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
             if ($file_format != "zip") {
                 $_SESSION["alert"] =  "Sorry, only zipped files (.zip) are allowed.";
-                header("location: add-lesson");
+                header("location: edit-lesson?lesson_id=$lesson_id");
                 exit;
             }
             if (($file_size > (10 * 1024 * 1024 * 1024)) || ($file_size < 0)) {
-                $_SESSION["alert"] = "Your file must be at most 100mb";
-                header("location: add-lesson");
+                header("location: edit-lesson?lesson_id=$lesson_id");
                 exit;
             }
 
@@ -25,19 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             move_uploaded_file($file_tmp, $attachment_name);
         } else {
             // No file was uploaded
-            $attachment_name = null;
+            $attachment_name = $get_lesson["attachment"];
         }
-        $update_lesson = "INSERT INTO lessons (lecturer_id, faculty_id, department_id, course_id, topic, content, attachment) VALUES ('$lecturer_id', '$faculty_id', '$department_id', '$course_id', '$topic', '$content', '$attachment_name')";
+        $update_lesson = "UPDATE lessons SET topic='$topic', content='$content', attachment='$attachment_name' WHERE id='$lesson_id' && lecturer_id='$lecturer_id' && faculty_id='$faculty_id' && department_id='$department_id' && course_id='$course_id'";
         if (mysqli_query($con, $update_lesson)) {
-            $_SESSION["alert"] = "Lesson Added";
+            $_SESSION["alert"] = "Lesson Updated";
         } else {
-            $_SESSION["alert"] = "An error occured, could not add new lesson";
+            $_SESSION["alert"] = "An error occured, could not update lesson";
         }
         header("location: lesson");
         exit;
     } catch (Exception $e) {
         $_SESSION["alert"] = "Cannot upload your attachment due to errors.";
-        header("location: add-lesson");
+        header("location: edit-lesson?lesson_id=$lesson_id");
         exit;
     }
 }

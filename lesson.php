@@ -60,7 +60,7 @@ $query_lesson = mysqli_query($con, $select_lesson);
                                         ?>
                                             <tr>
                                                 <td><?= $get_lesson["topic"] ?></td>
-                                                <td><?= $get_lesson["datetime"] ?></td>
+                                                <td><?= date("l, M d Y", strtotime($get_lesson["datetime"])) ?></td>
                                                 <td class="text-right">
                                                     <a href="edit-lesson?lesson_id=<?= $get_lesson["id"] ?>" class="btn btn-outline-primary">Edit Lesson</a>
                                                     <a href="add-quiz?lesson_id=<?= $get_lesson["id"] ?>" class="btn btn-outline-primary">Add Quiz</a>
