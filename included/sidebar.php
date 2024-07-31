@@ -35,6 +35,19 @@
 				if ($get_user["role"] === 'student') :
 				?>
 					<!-- Coming Soon -->
+					<li class="<?php
+								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
+								$file_name = end($file_path);
+								$route = explode(".", $file_name)[0];
+								if ($route === 'student-courses') {
+									echo 'active';
+								}
+								?>">
+						<a href="student-courses">
+							<i class="nc-icon nc-single-copy-04"></i>
+							<p>Courses</p>
+						</a>
+					</li>
 				<?php
 				endif;
 				?>
