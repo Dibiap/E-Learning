@@ -96,7 +96,7 @@ require_once "func/edit-lesson.php";
                                 </div>
                                 <div class="row">
                                     <div class="ml-auto mr-auto">
-                                        <button type="submit" class="btn btn-primary btn-round">Add</button>
+                                        <button type="submit" class="btn btn-primary btn-round">Save</button>
                                     </div>
                                 </div>
                             </form>

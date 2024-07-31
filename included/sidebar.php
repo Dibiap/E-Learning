@@ -99,19 +99,6 @@
 							<p>Division</p>
 						</a>
 					</li>
-					<li class="<?php
-								$file_path = explode("/", $_SERVER["SCRIPT_NAME"]);
-								$file_name = end($file_path);
-								$route = explode(".", $file_name)[0];
-								if ($route === 'feedbacks') {
-									echo 'active';
-								}
-								?>">
-						<a href="feedbacks">
-							<i class="nc-icon nc-chat-33"></i>
-							<p>Feedbacks</p>
-						</a>
-					</li>
 				<?php
 				endif;
 				?>
