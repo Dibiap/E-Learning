@@ -1,6 +1,4 @@
 <?php
-// TODO: Comeback here later, after courses is lessons
-
 require_once "required/session.php";
 require_once "required/sql.php";
 require_once "required/validate.php";
