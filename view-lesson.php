@@ -51,6 +51,25 @@ if (isset($_GET["lesson_id"])) {
                             endif;
                             ?>
                         </div>
+
+                        <?php
+                        if ($get_lesson["video"] != "") :
+                        ?>
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <video class="w-100" controls controlsList="nodownload">
+                                            <source src="<?= $get_lesson["video"] ?>" type="video/mp4">
+                                            Your browser does not support the HTML5 video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        endif;
+                        ?>
                         <div class="card-body">
                             <?= $get_lesson["content"] ?>
                         </div>

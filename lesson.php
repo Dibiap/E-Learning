@@ -63,7 +63,7 @@ $query_lesson = mysqli_query($con, $select_lesson);
                                                 <td><?= date("l, M d Y", strtotime($get_lesson["datetime"])) ?></td>
                                                 <td class="text-right">
                                                     <a href="edit-lesson?lesson_id=<?= $get_lesson["id"] ?>" class="btn btn-outline-primary">Edit Lesson</a>
-                                                    <a href="add-quiz?lesson_id=<?= $get_lesson["id"] ?>" class="btn btn-outline-primary">Add Quiz</a>
+                                                    <a href="add-quiz?lesson_id=<?= $get_lesson["id"] ?>" class="btn btn-outline-primary">Quiz</a>
                                                     <a href="func/delete-lesson?lesson_id=<?= $get_lesson["id"] ?>" class="btn btn-danger">Delete Lesson</a>
                                                 </td>
                                             </tr>

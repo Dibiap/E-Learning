@@ -48,13 +48,19 @@ require_once "func/add-lesson.php";
                                     <div class="col-md-8">
                                         <div class="form-group">
                                             <label>Topic</label>
-                                            <input type="text" class="form-control" name="topic" placeholder="Topic">
+                                            <input type="text" class="form-control" name="topic" placeholder="Topic" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Date</label>
                                             <input type="text" class="form-control" value="<?= date("l d, M Y") ?>" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Video: <small>must be less than 100MB</small></label>
+                                            <input type="file" name="video" style="position: relative; opacity: 100;" class="form-control" accept=".mp4">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

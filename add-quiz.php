@@ -63,23 +63,23 @@ require_once "func/add-quiz.php";
                             <form action="" method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Question</label>
-                                    <input type="text" class="form-control" name="question">
+                                    <input type="text" class="form-control" name="question" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Correct Answer <small>The correct answer will always be shuffled</small></label>
-                                    <input type="text" class="form-control" name="correct">
+                                    <input type="text" class="form-control" name="correct" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Wrong Answer 1</label>
-                                    <input type="text" class="form-control" name="wrong1">
+                                    <input type="text" class="form-control" name="wrong1" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Wrong Answer 2</label>
-                                    <input type="text" class="form-control" name="wrong2">
+                                    <input type="text" class="form-control" name="wrong2" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Wrong Answer 3</label>
-                                    <input type="text" class="form-control" name="wrong3">
+                                    <input type="text" class="form-control" name="wrong3" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </form>

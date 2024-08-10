@@ -73,7 +73,22 @@ require_once "func/edit-lesson.php";
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="d-flex justify-content-between">
-                                                <label>Attachment: <small>all attachments (single or multiple) must be zipped</small></label>
+                                                <label>Video: <small>must be less than 100MB</small></label>
+                                                <?php
+                                                if ($get_lesson["video"] != "") :
+                                                ?>
+                                                    <p><a href="<?= $get_lesson["video"] ?>" download>Download Video</a></p>
+                                                <?php
+                                                endif;
+                                                ?>
+                                            </div>
+                                            <input type="file" name="video" style="position: relative; opacity: 100;" class="form-control" accept=".mp4">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="d-flex justify-content-between">
+                                                <label>Attachment: <small>all attachments (single or multiple) must be zipped and less than 100MB</small></label>
                                                 <?php
                                                 if ($get_lesson["attachment"] != "") :
                                                 ?>
