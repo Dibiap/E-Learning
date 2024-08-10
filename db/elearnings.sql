@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2024 at 02:10 PM
+-- Generation Time: Aug 10, 2024 at 04:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -26,34 +26,16 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `attachment`
 --
-
-CREATE TABLE `attachment` (
-  `student_id` int(11) NOT NULL,
-  `company_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table elearnings.attachment: #1146 - Table &#039;elearnings.attachment&#039; doesn&#039;t exist
+-- Error reading data for table elearnings.attachment: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `elearnings`.`attachment`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `company`
 --
-
-CREATE TABLE `company` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `company`
---
-
-INSERT INTO `company` (`id`, `name`, `address`, `datetime`) VALUES
-(1, 'Harvoxx Tech Hub', 'Elzazi Plaza', '2024-06-18 19:16:02'),
-(2, 'Whyte Creativity', 'Elzazi Plaza', '2024-06-18 19:16:03'),
-(3, 'RSU', 'Tazi Plaza', '2024-06-18 19:16:03'),
-(4, 'NLNG', 'Plaza', '2024-06-18 19:16:03');
+-- Error reading structure for table elearnings.company: #1146 - Table &#039;elearnings.company&#039; doesn&#039;t exist
+-- Error reading data for table elearnings.company: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `elearnings`.`company`&#039; at line 1
 
 -- --------------------------------------------------------
 
@@ -75,7 +57,8 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `department_id`, `lecturer_id`, `name`, `code`, `unit`) VALUES
-(12, 3, 3, 'Database', '434', 3);
+(13, 3, 3, 'Database', '434', 3),
+(14, 3, 5, 'Algorithms', '412', 4);
 
 -- --------------------------------------------------------
 
@@ -128,27 +111,8 @@ INSERT INTO `faculty` (`id`, `name`) VALUES
 --
 -- Table structure for table `feedbacks`
 --
-
-CREATE TABLE `feedbacks` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `supervisor_id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `log_id` int(11) NOT NULL,
-  `company_id` int(11) NOT NULL,
-  `feedback` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `feedbacks`
---
-
-INSERT INTO `feedbacks` (`id`, `supervisor_id`, `student_id`, `log_id`, `company_id`, `feedback`, `datetime`) VALUES
-(4, 2, 3, 4, 1, 'When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever When ever ', '2024-06-20 23:21:59'),
-(9, 2, 3, 5, 1, 'Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! Srew Ya! ', '2024-06-21 10:11:58'),
-(13, 2, 4, 8, 1, 'trying', '2024-06-22 11:41:29'),
-(17, 2, 3, 9, 1, ' and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy', '2024-06-22 11:46:04'),
-(18, 2, 4, 7, 1, 'Damn Bloody Damn', '2024-06-22 11:59:18');
+-- Error reading structure for table elearnings.feedbacks: #1146 - Table &#039;elearnings.feedbacks&#039; doesn&#039;t exist
+-- Error reading data for table elearnings.feedbacks: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `elearnings`.`feedbacks`&#039; at line 1
 
 -- --------------------------------------------------------
 
@@ -169,34 +133,71 @@ CREATE TABLE `lecturers` (
 
 INSERT INTO `lecturers` (`id`, `user_id`, `faculty_id`, `department_id`) VALUES
 (3, 17, '1', '3'),
-(4, 18, '8', '13');
+(4, 18, '8', '13'),
+(5, 19, '1', '3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lessons`
+--
+
+CREATE TABLE `lessons` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `lecturer_id` int(11) NOT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `topic` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `attachment` text DEFAULT NULL,
+  `video` text DEFAULT NULL,
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lessons`
+--
+
+INSERT INTO `lessons` (`id`, `lecturer_id`, `faculty_id`, `department_id`, `course_id`, `topic`, `content`, `attachment`, `video`, `datetime`) VALUES
+(6, 5, 1, 3, 14, 'New Topic', '<p>qwwqerw</p>\n\n<p>wewgterg</p>\n\n<p>&lt;script&gt;</p>\n\n<p>alert(&#39;Hello World&#39;);</p>\n\n<p>&lt;/script&gt;</p>\n', 'attachments/RSU-E-LEARNING-2024-07-30-05:33:44pm768835.zip', NULL, '2024-07-30 15:33:44'),
+(7, 5, 1, 3, 14, 'Bubble Sort', '<p>qaw</p>\n\n<p>oiltrf8uir</p>\n\n<p>tyejjkyukyu</p>\n', 'attachments/RSU-E-LEARNING-2024-07-30-05:34:49pm343975.zip', NULL, '2024-07-30 15:34:49'),
+(13, 5, 1, 3, 14, 'Merge Sort', '<h1 style=\"text-align:center\">Merge Sort</h1>\r\n\r\n<p style=\"text-align:center\">Uses Divide and Conquer Algorithm</p>\r\n\r\n<p style=\"text-align:center\">All the sorting algorthims seems cool</p>\r\n\r\n<p style=\"text-align:center\"><u><strong>Steps</strong></u></p>\r\n\r\n<ul>\r\n	<li style=\"text-align: justify;\">First Split the list into two different list recursively until each sub, sub, ..., sub-list contains just&nbsp; element</li>\r\n	<li style=\"text-align: justify;\">Sort each list/element on the same level and merge them</li>\r\n	<li style=\"text-align: justify;\">then proceed with the merged list to sort the other lists in the same level as this sorted list</li>\r\n	<li style=\"text-align: justify;\">and so on until we get to the root</li>\r\n</ul>\r\n', '', NULL, '2024-07-31 09:12:40'),
+(14, 3, 1, 3, 13, 'Relational Database', '<h1>Relational Database<img alt=\"Randome Picture\" src=\"https://picsum.photos/150/150\" style=\"border-style:solid; border-width:1px; float:left; height:150px; margin:10px; width:150px\" /></h1>\r\n\r\n<p>This type of database makes use of rows and columns - like tables to store information</p>\r\n\r\n<p><u><strong>Examples are:</strong></u></p>\r\n\r\n<ul>\r\n	<li>MySQL</li>\r\n	<li>PostgreSQL</li>\r\n	<li>SQLite</li>\r\n</ul>\r\n', '', NULL, '2024-07-31 10:21:53'),
+(16, 5, 1, 3, 14, 'New Topic', '<p>wegtqrewg</p>\r\n\r\n<p>qegergqerg<strong>rereqger</strong></p>\r\n', 'attachments/RSU-E-LEARNING-2024-08-10-04:13:25am840478.zip', NULL, '2024-08-10 02:13:25'),
+(19, 5, 1, 3, 14, 'New Lesson With Attachment and Video', '<h1>This Lecture</h1>\r\n\r\n<p><span style=\"font-size:14px\">contains an attachment and a video</span></p>\r\n', 'attachments/RSU-E-LEARNING-ZIP-2024-08-10-04:44:29am63758.zip', 'videos/RSU-E-LEARNING-VIDEO-2024-08-10-04:44:29am821196.mp4', '2024-08-10 02:35:04');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `logs`
 --
+-- Error reading structure for table elearnings.logs: #1146 - Table &#039;elearnings.logs&#039; doesn&#039;t exist
+-- Error reading data for table elearnings.logs: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `elearnings`.`logs`&#039; at line 1
 
-CREATE TABLE `logs` (
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz`
+--
+
+CREATE TABLE `quiz` (
   `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `company_id` int(11) NOT NULL,
-  `activity` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT current_timestamp()
+  `lesson_id` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `correct` varchar(255) NOT NULL,
+  `wrong1` varchar(255) NOT NULL,
+  `wrong2` varchar(255) NOT NULL,
+  `wrong3` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `logs`
+-- Dumping data for table `quiz`
 --
 
-INSERT INTO `logs` (`id`, `user_id`, `company_id`, `activity`, `datetime`) VALUES
-(4, 13, 1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi odio omnis natus aut ab, facere, mollitia cumque nihil repellendus a ipsam. Modi voluptatibus quia facere incidunt nihil soluta dolor veritatis quod officia unde ipsum eum blanditiis, facilis fugiat repudiandae et quibusdam dicta, mollitia ut doloribus optio sunt earum eveniet. Officiis?\r\n098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 ', '2024-06-19 10:30:19'),
-(5, 13, 1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi odio omnis natus aut ab, facere, mollitia cumque nihil repellendus a ipsam. Modi voluptatibus quia facere incidunt nihil soluta dolor veritatis quod officia unde ipsum eum blanditiis, facilis fugiat repudiandae et quibusdam dicta, mollitia ut doloribus optio sunt earum eveniet. Officiis?\r\n098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 098765321 qwertyuiop 1234567890 asfghjkl 1234567890 mnbvcxz 0987654321 ', '2024-06-20 00:33:16'),
-(7, 15, 1, 'What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell What the hell ', '2024-06-19 20:14:58'),
-(8, 15, 1, 'Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 Part 2 ', '2024-06-20 20:15:58'),
-(9, 13, 1, 'Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy Im the best and at Child giggles academy ', '2024-06-21 10:13:20'),
-(10, 15, 1, 'I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC I lost my PC ', '2024-06-21 10:14:01'),
-(12, 15, 1, 'Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit Bloody Hell, Shit ', '2024-06-22 11:22:36');
+INSERT INTO `quiz` (`id`, `lesson_id`, `question`, `correct`, `wrong1`, `wrong2`, `wrong3`) VALUES
+(1, 13, 'What is the topic', 'Merge Sort', 'Bubble Sort', 'Selection Sort', 'Insertion Sort'),
+(2, 13, 'What is the name of the lecturer', 'Prosper', 'Not Prosper', 'Still Not Prosper', 'Absolutely Not Prosper');
 
 -- --------------------------------------------------------
 
@@ -217,8 +218,6 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `user_id`, `matric`, `faculty_id`, `department_id`) VALUES
-(3, 13, 'DE:2020/4316', 'Science', 'Computer Science'),
-(4, 15, 'DE.2020/4276', 'Science', 'Computer Science'),
 (5, 16, 'DE.2020/4228', '1', '3');
 
 -- --------------------------------------------------------
@@ -262,20 +261,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `phone`, `password`, `role`, `loginkey`) VALUES
-(2, 'admin', 'admin', 'admin@gmail.com', '09114895572', '$2y$10$2nV8gty7hxjhQw59CB/sg.aCvwVVriFsiYDThFJWY1TJCb2FU8dPK', 'admin', '$2y$10$IBCXrKO6YRvjmuGEzuThBORi6CtO3.vFufFS9szFTn73prF.h4ezC'),
-(16, 'Student', 'Student', 'student@gmail.com', '123490', '$2y$10$X3iWj8G3.SWcQWYxjme7vuZE3RGfNj.9.D9dhiMTfrYQmS21gpe1W', 'student', '$2y$10$xaxu6FbZuBp7d8T9MtA/geNTq7Mu.Nkvp/wXZbyFm3ebYU0YNCDZ.'),
-(17, 'Teacher', 'Teacher', 'teacher@gmail.com', '98765232131', '$2y$10$euY/594uN3O6NHs6pL/ILOSkpyf2roMQWYFROni33mTU25u2q12Xy', 'lecturer', '$2y$10$iBYZy3M6/R6tZ98ZH8oxguMkb1.W6bRtR/bDGanLNbuINpYiJ6l06'),
-(18, 'Lecturer', 'Lecturer', 'lecturer@gmail.com', '463789201', '$2y$10$BCgetVN3fDb2iOkHMmzXnuXgM4vvcKbS1PX1d3e7VZaQAlucAWdQa', 'lecturer', '$2y$10$A48jt.bJoaAinGP7I9PcG.kGaBvIoyjZf3TF21Ube5M1712X5US16');
+(2, 'admin', 'admin', 'admin@gmail.com', '09114895572', '$2y$10$2nV8gty7hxjhQw59CB/sg.aCvwVVriFsiYDThFJWY1TJCb2FU8dPK', 'admin', '$2y$10$y5i3FHmtP3eO.jdUl6ncNuzI4t99XPosgYYP5ltEzue/60i8POzGG'),
+(16, 'Student', 'Student', 'student@gmail.com', '123490', '$2y$10$X3iWj8G3.SWcQWYxjme7vuZE3RGfNj.9.D9dhiMTfrYQmS21gpe1W', 'student', '$2y$10$gMU7cdcfQVHVvatSyFTrHOmbkPFCehSKiQrNDMvSmAvw5Wmb0agfC'),
+(17, 'Teacher', 'Teacher', 'teacher@gmail.com', '98765232131', '$2y$10$euY/594uN3O6NHs6pL/ILOSkpyf2roMQWYFROni33mTU25u2q12Xy', 'lecturer', '$2y$10$YiEoNeOelIgFijpcAa226eWEZwMyQBNOQNAVGm5CeNLninXKbG7vi'),
+(18, 'Lecturer', 'Lecturer', 'lecturer@gmail.com', '463789201', '$2y$10$BCgetVN3fDb2iOkHMmzXnuXgM4vvcKbS1PX1d3e7VZaQAlucAWdQa', 'lecturer', '$2y$10$A48jt.bJoaAinGP7I9PcG.kGaBvIoyjZf3TF21Ube5M1712X5US16'),
+(19, 'Prosper', 'Prosper', 'Prosper@gmail.com', '73282938', '$2y$10$r28.L4HTalNzrHpXyl45AufpA5mlck8/i9eo76bps564Y/B1gYKC2', 'lecturer', '$2y$10$r5WJswPhw8q2pBcQT71sBOOKs75DQ0mnTHAyYlC8NTl3ksPo4BXzi');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `company`
---
-ALTER TABLE `company`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `courses`
@@ -296,21 +290,21 @@ ALTER TABLE `faculty`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `feedbacks`
---
-ALTER TABLE `feedbacks`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `lecturers`
 --
 ALTER TABLE `lecturers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `logs`
+-- Indexes for table `lessons`
 --
-ALTER TABLE `logs`
+ALTER TABLE `lessons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `quiz`
+--
+ALTER TABLE `quiz`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -336,16 +330,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `company`
---
-ALTER TABLE `company`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -360,28 +348,28 @@ ALTER TABLE `faculty`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `feedbacks`
---
-ALTER TABLE `feedbacks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
 -- AUTO_INCREMENT for table `lecturers`
 --
 ALTER TABLE `lecturers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `logs`
+-- AUTO_INCREMENT for table `lessons`
 --
-ALTER TABLE `logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `lessons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `quiz`
+--
+ALTER TABLE `quiz`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `supervisors`
@@ -393,7 +381,7 @@ ALTER TABLE `supervisors`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
