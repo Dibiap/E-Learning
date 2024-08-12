@@ -76,7 +76,7 @@ include_once "included/head.php";
 										$get_student = mysqli_fetch_assoc($query_student);
 								?>
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="form-group">
 													<label>Faculty</label>
 													<select class="form-control" name="faculty" id="faculty" required>
@@ -93,7 +93,7 @@ include_once "included/head.php";
 													</select>
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="form-group">
 													<label>Department</label>
 													<select class="form-control" name="department" id="department" required>
@@ -107,6 +107,14 @@ include_once "included/head.php";
 														<?php
 														endif;
 														?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Level</label>
+													<select class="form-control" name="level" id="level" required>
+														<option value="<?= $get_student["level"] ?>"><?= $get_student["level"] ?></option>
 													</select>
 												</div>
 											</div>

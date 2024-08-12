@@ -96,7 +96,7 @@ require_once "func/students.php";
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label>Faculty</label>
 											<select class="form-control" name="faculty" id="faculty" required>
@@ -115,10 +115,27 @@ require_once "func/students.php";
 											</select>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label>Department</label>
 											<select class="form-control" name="department" id="department" required></select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Level</label>
+											<select class="form-control" name="level" id="level" required>
+												<option value="" selected disabled>-- select your level ---</option>
+												<option value="100">100</option>
+												<option value="200">200</option>
+												<option value="300">300</option>
+												<option value="400">400</option>
+												<option value="500">500</option>
+												<option value="600">600</option>
+												<option value="700">700</option>
+												<option value="800">800</option>
+												<option value="900">900</option>
+											</select>
 										</div>
 									</div>
 								</div>
