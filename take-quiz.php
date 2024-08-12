@@ -56,7 +56,8 @@ require_once "func/take-quiz.php";
                         <h4 class="float-left">Topic: <u><?= $get_lesson["topic"] ?></u></h4>
                         <p class="float-right"><?= date("l, M d Y", strtotime($get_lesson["datetime"])) ?></p>
                     </div>
-                    <form action="" method="post">
+                    <p>You have a total of <?= 10 * mysqli_num_rows($query_question) ?> seconds to complete this quiz before is automatically submits</p>
+                    <form action="" method="post" id="quiz">
                         <input type="hidden" name="lesson_id" value="<?= $lesson_id ?>">
                         <?php
                         while ($get_question = mysqli_fetch_assoc($query_question)) :
@@ -96,6 +97,14 @@ require_once "func/take-quiz.php";
         ?>
     </div>
 </div>
+<script type="text/javascript">
+    function autoSubmitForm() {
+        setTimeout(function() {
+            document.getElementById("quiz").submit();
+        }, <?= 10000 * mysqli_num_rows($query_question) ?>);
+    }
+    autoSubmitForm();
+</script>
 <?php
 include_once "included/scripts.php";
 ?>
