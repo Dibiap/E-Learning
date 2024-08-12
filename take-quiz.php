@@ -10,6 +10,7 @@ include_once "included/head.php";
 if (isset($_GET["lesson_id"])) {
     // $query_student is gotten from validate.php
     $get_student = mysqli_fetch_assoc($query_student);
+    $student_id = $get_student["id"];
     $lesson_id = $_GET["lesson_id"];
     $faculty_id = $get_student["faculty_id"];
     $department_id = $get_student["department_id"];

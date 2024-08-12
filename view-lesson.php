@@ -44,6 +44,11 @@ if (isset($_GET["lesson_id"])) {
                             <h4 class="card-title float-left">Topic: <u><?= $get_lesson["topic"] ?></u></h4>
                             <small class="float-right"><?= date("l, M d Y", strtotime($get_lesson["datetime"])) ?></small>
                             <?php
+                            if ($get_lesson["video"] != "") :
+                            ?>
+                                <p class="float-right mr-5">Can't what the video? <u><a href="<?= $get_lesson["video"] ?>" download>Download It!</a></u></p>
+                            <?php
+                            endif;
                             if ($get_lesson["attachment"] != "") :
                             ?>
                                 <p class="float-right mr-5"><u><a href="<?= $get_lesson["attachment"] ?>" download>Attachment</a></u></p>
@@ -55,18 +60,18 @@ if (isset($_GET["lesson_id"])) {
                         <?php
                         if ($get_lesson["video"] != "") :
                         ?>
-                        <div class="card-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <video class="w-100" controls controlsList="nodownload">
-                                            <source src="<?= $get_lesson["video"] ?>" type="video/mp4">
-                                            Your browser does not support the HTML5 video tag.
-                                        </video>
+                            <div class="card-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <video class="w-100" controls controlsList="nodownload">
+                                                <source src="<?= $get_lesson["video"] ?>" type="video/mp4">
+                                                Your browser does not support the HTML5 video tag.
+                                            </video>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <?php
                         endif;
                         ?>

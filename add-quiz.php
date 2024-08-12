@@ -57,7 +57,7 @@ require_once "func/add-quiz.php";
                 <div class="col-md-2">
                     <button data-toggle="collapse" class="btn btn-primary" data-target="#add_quiz">Add Quiz</button>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div id="add_quiz" class="card collapse">
                         <div class="card-body">
                             <form action="" method="post">
@@ -85,6 +85,9 @@ require_once "func/add-quiz.php";
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <a href="scores?lesson_id=<?= $lesson_id ?>" class="btn btn-primary">View Students Scores</a>
                 </div>
                 <div class="col-md-12">
                     <div class="card">

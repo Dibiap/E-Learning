@@ -3,7 +3,7 @@ require_once "required/session.php";
 require_once "required/sql.php";
 require_once "required/validate.php";
 require_once "access/lecturer_only.php";
-const PAGE_TITLE = "Students Logs - Digital Logbook System";
+const PAGE_TITLE = "Students List - Digital Logbook System";
 include_once "included/head.php";
 // Get Lecturer Info
 // $query_lecturer can be found in `validate.php`

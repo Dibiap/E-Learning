@@ -1,6 +1,6 @@
 <?php
 require_once "required/session.php";
-const PAGE_TITLE = "Digital SIWES Logbook";
+const PAGE_TITLE = "E-Learning System";
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -29,6 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    $insert_score = "INSERT INTO scores (student_id, lesson_id, score, total_question) VALUES ('$student_id', '$lesson_id', '$score', '". mysqli_num_rows($query_question) ."')";
+    $query_score = mysqli_query($con, $insert_score);
+    if (!$query_score) {
+        $_SESSION["alert"] = "An error occured, cannot compute score";
+        header("location: view-lesson?lesson_id=$lesson_id");
+        exit;
+    }
+
     $_SESSION["alert"] = "Thank you for taking the quiz. Your score is <b>$score/" . mysqli_num_rows($query_question) . "</b>. There is always room for improvements and you can always retake the quiz";
     header("location: view-lesson?lesson_id=$lesson_id");
     exit;
