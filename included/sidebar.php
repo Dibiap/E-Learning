@@ -1,13 +1,13 @@
-<div class="sidebar" data-color="white" data-active-color="danger">
+<div class="sidebar" style="background-color: #030749 !important;" data-color="white" data-active-color="danger">
 	<div class="logo">
-		<a href="javascript:;" class="simple-text logo-mini">
+		<a href="javascript:;" class="">
 			<div class="logo-image-small">
-				<img src="assets/img/logo-small.png">
+				<img src="assets/img/rsu-logo.png" class="mt-3">
 			</div>
 			<!-- <p>CT</p> -->
 		</a>
 		<a href="javascript:;" class="simple-text logo-normal">
-			E-Learning System
+			<!-- E-Learning System -->
 			<!-- <div class="logo-image-big">
 			<img src="assets/img/logo-big.png">
 		  </div> -->
