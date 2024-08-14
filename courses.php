@@ -82,7 +82,7 @@ require_once "func/add-course.php";
                         </select>
                     </div>
                     <div class="col-md-3 col-sm-6 mb-2">
-                        <input type="text" class="form-control" placeholder="Course Code" name="code">
+                        <input type="text" class="form-control" placeholder="Course Code (CMS XXX)" name="code">
                     </div>
                     <div class="col-md-3 col-sm-3 mb-2">
                         <input type="number" class="form-control" placeholder="Course Unit" name="unit">
@@ -104,6 +104,7 @@ require_once "func/add-course.php";
                                         <th>Course Code</th>
                                         <th>Course Name</th>
                                         <th>Unit</th>
+                                        <th>Level</th>
                                         <th>Lecturer</th>
                                         <th class="text-right">Actions</th>
                                     </thead>
@@ -115,6 +116,7 @@ require_once "func/add-course.php";
                                                 <td><?= $get_course["code"] ?></td>
                                                 <td><?= $get_course["name"] ?></td>
                                                 <td><?= $get_course["unit"] ?></td>
+                                                <td><?= $get_course["level"] ?></td>
                                                 <?php
                                                 $select_lecturer = "SELECT * FROM lecturers WHERE id='" . $get_course["lecturer_id"] . "'";
                                                 $query_lecturer = mysqli_query($con, $select_lecturer);

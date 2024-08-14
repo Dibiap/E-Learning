@@ -56,7 +56,7 @@ require_once "func/take-quiz.php";
                         <h4 class="float-left">Topic: <u><?= $get_lesson["topic"] ?></u></h4>
                         <p class="float-right"><?= date("l, M d Y", strtotime($get_lesson["datetime"])) ?></p>
                     </div>
-                    <p>You have a total of <?= 10 * mysqli_num_rows($query_question) ?> seconds to complete this quiz before is automatically submits</p>
+                    <p>You have a total of <?= number_format(10 * mysqli_num_rows($query_question), 0) ?> seconds to complete this quiz before is automatically submits</p>
                     <form action="" method="post" id="quiz">
                         <input type="hidden" name="lesson_id" value="<?= $lesson_id ?>">
                         <?php

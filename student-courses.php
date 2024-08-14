@@ -8,6 +8,7 @@ include_once "included/head.php";
 
 $get_student = mysqli_fetch_assoc($query_student);
 $department_id = $get_student["department_id"];
+$level = $get_student["level"];
 
 $select_department = "SELECT * FROM departments WHERE id='$department_id'";
 $query_department = mysqli_query($con, $select_department);
@@ -19,7 +20,7 @@ if (mysqli_num_rows($query_department) == 0) {
 }
 $get_department = mysqli_fetch_assoc($query_department);
 
-$select_course = "SELECT * FROM courses WHERE department_id='$department_id' ORDER BY id DESC";
+$select_course = "SELECT * FROM courses WHERE department_id='$department_id' && level='$level' ORDER BY id DESC";
 $query_course = mysqli_query($con, $select_course);
 
 // require_once "func/add-course.php";
@@ -46,6 +47,7 @@ $query_course = mysqli_query($con, $select_course);
                                         <th>Course Name</th>
                                         <th>Course Code</th>
                                         <th>Unit</th>
+                                        <th>Level</th>
                                         <th>Lecturer</th>
                                         <th class="text-right">Actions</th>
                                     </thead>
@@ -57,6 +59,7 @@ $query_course = mysqli_query($con, $select_course);
                                                 <td><?= $get_course["name"] ?></td>
                                                 <td><?= $get_course["code"] ?></td>
                                                 <td><?= $get_course["unit"] ?></td>
+                                                <td><?= $get_course["level"] ?></td>
                                                 <?php
                                                 $select_lecturer = "SELECT * FROM lecturers WHERE id='" . $get_course["lecturer_id"] . "'";
                                                 $query_lecturer = mysqli_query($con, $select_lecturer);
